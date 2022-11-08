@@ -15,8 +15,13 @@ services:
     expose:
       - 3306
       - 33060
-
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ppass"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
   backend:
+    image: step_2-backend
     build:
       context: backend
       target: builder
@@ -26,8 +31,7 @@ services:
     ports:
       - 8000:8000
     depends_on:
-      db:
-        condition: service_healthy
+      - "db"
 
 volumes:
   db-data:
