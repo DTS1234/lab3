@@ -1,0 +1,27 @@
+services:
+  service1:
+    build:
+      dockerfile: Dockerfile
+      context: service-1
+    ports:
+      - 3000:18888
+    networks:
+      - net1
+  service2:
+    build:
+      dockerfile: Dockerfile
+      context: service-2
+    ports:
+      - 3001:18888
+    networks:
+      - net1
+  nginx:
+    build:
+      dockerfile: Dockerfile
+      context: nginx
+    ports:
+      - 80:80
+    networks:
+      - net1
+networks:
+  net1:
