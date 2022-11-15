@@ -15,13 +15,8 @@ services:
     expose:
       - 3306
       - 33060
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ppass"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
   backend:
-    image: step_2-backend
+    image: step_2
     build:
       context: backend
       target: builder

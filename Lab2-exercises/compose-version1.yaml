@@ -6,7 +6,7 @@ services:
     ports:
       - 3000:18888
     networks:
-      - net1
+      - unify
   service2:
     build:
       dockerfile: Dockerfile
@@ -15,6 +15,7 @@ services:
       - 3001:18888
     networks:
       - net1
+      - unify
   nginx:
     build:
       dockerfile: Dockerfile

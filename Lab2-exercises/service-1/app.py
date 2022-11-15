@@ -3,14 +3,16 @@ from flask import request
 
 app = Flask(__name__)
 
-WORDS = []
-with open("file.txt", "r") as file:
-    for line in file.readlines():
-        WORDS.append(line.rstrip())
-print(WORDS)
+BOX = None
+
 @app.route("/", methods=["GET"])
 def open_box():
-   return WORDS if len(WORDS) > 0 else ""
+    global BOX
+
+    box = BOX
+    BOX = None
+
+    return box if box else ""
 
 
 @app.route("/", methods=["POST"])
