@@ -17,11 +17,6 @@ services:
     expose:
       - 3306
       - 33060
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ppass"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
   backend:
     build:
       context: backend
@@ -35,18 +30,17 @@ services:
       - backnet
       - frontnet
     depends_on:
-      db:
-        condition: service_healthy
+      - "db"
 
-  proxy:
-    build: proxy
-    restart: always
-    ports:
-      - 80:80
-    depends_on: 
-      - backend
-    networks:
-      - frontnet
+  # proxy: your code will be here
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
+  # 
 
 volumes:
   db-data:
