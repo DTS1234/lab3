@@ -29,7 +29,9 @@ services:
     secrets:
       - db-password
     ports:
-      - 8000:8000
+     - target: 8000
+       published: 8000
+       mode: host
     depends_on:
       - "db"
 
