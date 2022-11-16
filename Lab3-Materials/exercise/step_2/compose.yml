@@ -14,19 +14,13 @@ services:
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
     expose:
       - 3306
-      - 33060
   backend:
-    image: step_2
-    build:
-      context: backend
-      target: builder
+    build: backend
     restart: always
     secrets:
       - db-password
     ports:
-     - target: 8000
-       published: 8000
-       mode: host
+      - 8000:8000
     depends_on:
       - "db"
 
