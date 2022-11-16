@@ -16,11 +16,8 @@ services:
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
     expose:
       - 3306
-      - 33060
   backend:
-    build:
-      context: backend
-      target: builder
+    build: backend
     restart: always
     secrets:
       - db-password
