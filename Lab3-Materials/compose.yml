@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8
+    command: '--default-authentication-plugin=mysql_native_password'
+    restart: always
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=example
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 3306
+      - 33060
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ppass"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  backend:
+    image: step_2-backend
+    build:
+      context: backend
+      target: builder
+    restart: always
+    secrets:
+      - db-password
+    ports:
+     - target: 8000
+       published: 8000
+       mode: host
+    depends_on:
+      - "db"
+
+volumes:
+  db-data:
+
+secrets:
+  db-password:
+    file: db/password.txt
