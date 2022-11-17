@@ -2,27 +2,9 @@ version: "3.9"
 
 services:
   db:
-    image: mysql:8
-    command: '--default-authentication-plugin=mysql_native_password'
-    restart: always
-    secrets:
-      - db-password
-    volumes:
-      - db-data:/var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=example
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
-    expose:
-      - 3306
+    # your code will be here
   backend:
-    build: backend
-    restart: always
-    secrets:
-      - db-password
-    ports:
-      - 8000:8000
-    depends_on:
-      - "db"
+    # your code will be here
 
 volumes:
   db-data:
