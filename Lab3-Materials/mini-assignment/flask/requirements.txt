@@ -1,5 +1,2 @@
-pymongo:
-$ python -m pip install pymongo
-
-flask:
-$ pip install Flask
+pymongo
+flask
